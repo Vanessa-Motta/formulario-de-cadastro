@@ -7,7 +7,7 @@ import { Container, Typography } from "@material-ui/core"
 class App extends Component {
   render() {
     return (
-      <Container className="container" component="article" maxWidth="sm">
+      <Container component="article" maxWidth="sm">
         <Typography variant="h3" component="h1" align="center" >Formulário de cadastro</Typography>
         <FormularioCadastro aoEnviar={aoEnviarForm}  validarCPF={validarCPF} />
       </Container>
