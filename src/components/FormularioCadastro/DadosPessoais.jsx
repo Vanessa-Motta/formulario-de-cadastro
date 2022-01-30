@@ -10,20 +10,29 @@ function DadosPessoais({ aoEnviar, validacoes }) {
   const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
   
   function validarCampos(event){
-    console.log(event.target);
     const {name, value} = event.target;
     const novoEstado ={...erros};
     novoEstado[name]= validacoes[name](value);
     setErros(novoEstado);
-    console.log(novoEstado);
   }
-  
+
+  function possoEnviar(){
+    for(let campos in erros){
+      if(!erros[campos].valido){
+        return false;
+      }
+    }
+    return true;
+  }
   
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        aoEnviar({ nome, sobrenome, cpf, novidades, promocoes });
+        if(possoEnviar()){
+          aoEnviar({ nome, sobrenome, cpf, novidades, promocoes });
+        }
+        
       }}
     >
       <TextField
@@ -33,6 +42,7 @@ function DadosPessoais({ aoEnviar, validacoes }) {
         }}
         id="nome"
         label="Nome"
+        name="nome"
         variant="outlined"
         margin="normal"
         fullWidth
@@ -44,6 +54,7 @@ function DadosPessoais({ aoEnviar, validacoes }) {
         }}
         id="sobrenome"
         label="Sobrenome"
+        name="sobrenome"
         variant="outlined"
         margin="normal"
         fullWidth
