@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { TextField, Button, Switch, FormControlLabel } from "@material-ui/core";
 import ValidacoesDeCadastro from "../../contexts/ValidacoesDeCadastro"
+import useErros from "../../hooks/useErros";
 
 function DadosPessoais({ aoEnviar }) {
   const [nome, setNome] = useState("");
@@ -8,24 +9,10 @@ function DadosPessoais({ aoEnviar }) {
   const [cpf, setCpf] = useState("");
   const [promocoes, setPromocoes] = useState(true);
   const [novidades, setNovidades] = useState(false);
-  const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
-  
   const validacoes = useContext(ValidacoesDeCadastro)
-  function validarCampos(event){
-    const {name, value} = event.target;
-    const novoEstado ={...erros};
-    novoEstado[name]= validacoes[name](value);
-    setErros(novoEstado);
-  }
-
-  function possoEnviar(){
-    for(let campos in erros){
-      if(!erros[campos].valido){
-        return false;
-      }
-    }
-    return true;
-  }
+  const [erros, validarCampos, possoEnviar] = useErros(validacoes);
+  
+  
   
   return (
     <form
