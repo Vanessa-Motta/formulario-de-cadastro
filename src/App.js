@@ -3,7 +3,7 @@ import "./App.css";
 import FormularioCadastro from "./components/FormularioCadastro/FormularioCadastro";
 import 'fontsource-roboto';
 import { Container, Typography } from "@material-ui/core"
-import {validarCPF, validarSenha} from "./modelo/cadastro.js"
+import {validarCPF, validarSenha} from "./models/cadastro"
 
 class App extends Component {
   render() {

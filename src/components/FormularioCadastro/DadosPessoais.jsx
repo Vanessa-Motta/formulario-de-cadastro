@@ -10,10 +10,12 @@ function DadosPessoais({ aoEnviar, validacoes }) {
   const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
   
   function validarCampos(event){
+    console.log(event.target);
     const {name, value} = event.target;
-    const novoEstado ={...erros}
+    const novoEstado ={...erros};
     novoEstado[name]= validacoes[name](value);
     setErros(novoEstado);
+    console.log(novoEstado);
   }
   
   
